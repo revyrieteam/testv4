@@ -1,8 +1,24 @@
-function calculateSum(a, b) {
-  var total = a + b;
-  return total
+const express = require('express');
+const app = express();
+
+// Middleware to escape user input (basic example)
+function sanitize(input) {
+    return String(input)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
 }
 
-var unused = 123;
+app.get('/user/:id', function (req, res) {
+    const userId = sanitize(req.params.id); // ✅ Sanitize input
+    res.send(`User ID is: ${userId}`);
+});
 
-calculateSum(5)
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
+
+let debug = true;
+if (debug === false) {  // ✅ Comparison operator fixed
+    console.log("Debug mode is off");
+}
