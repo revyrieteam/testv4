@@ -11,7 +11,7 @@ function sanitize(input) {
 
 app.get('/user/:id', function (req, res) {
     const userId = sanitize(req.params.id); // ✅ Sanitize input
-    res.send(`User ID is: ${sanitize(userId)}`);
+    res.send(`User ID is: ${sanitize(userId).replace(/[^0-9]/g, '')}`);
 });
 
 app.listen(3000, () => {
