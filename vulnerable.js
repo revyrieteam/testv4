@@ -1,14 +1,12 @@
 const express = require('express');
 const app = express();
 
-app.get('/user/:id', function (req, res) {
-    const userId = req.params.id;
-    res.send("User ID is: " + userId);  // ❌ Potential XSS
+app.get('/user/:id', (req, res) => {
+    const userId = encodeURIComponent(req.params.id);  // ✅ Basic sanitization
+    res.send(`User ID is: ${userId}`);
 });
 
-app.listen(3000);
+app.listen(3000, () => console.log('Server running on port 3000'));
 
 let debug = true;
-if (debug = false) {  // ❌ Bug: assignment instead of comparisonn
-    console.log("Debug mode is off");
-}
+if (!debug) console.log("Debug mode is off");  // ✅ Clean check
