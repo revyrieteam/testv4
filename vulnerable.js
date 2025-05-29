@@ -9,6 +9,6 @@ app.get('/user/:id', function (req, res) {
 app.listen(3000);
 
 let debug = true;
-if (debug = false) {  // ❌ Bug: assignment instead of comparison
+if (debug === false) {  // ❌ Bug: assignment instead of comparison
     console.log("Debug mode is off");
 }
