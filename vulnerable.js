@@ -3,7 +3,7 @@ const app = express();
 
 app.get('/user/:id', function (req, res) {
     const userId = req.params.id;
-    res.send("User ID is: " + userId);  // ❌ Potential XSS
+    res.send("User ID is: " + encodeURIComponent(userId));  // Safely encode user input
 });
 
 app.listen(3000);
